@@ -4,6 +4,7 @@ import './form.css';
 import '../App.css'
 import { Link } from 'react-router-dom'
 import Dropdown from "../dropdown/dropDown";
+import axios from "../axiosInstance";
 
 class Form extends Component {
 
@@ -30,16 +31,17 @@ class Form extends Component {
     }
 
     issueSubmitHandler = (event) => {
-        const issues = this.state.issues;
-        const newIssues = issues.concat({
-            title: this.state.titleInput,
-            comment: this.state.commentInput
-        });
-        this.setState((prevState) => {
-            return {
-                ...prevState,
-                issues: newIssues
-            };
+    const issue = {
+        title: this.state.titleInput,
+        comment: this.state.commentInput 
+    }    
+    
+    axios.post('/issues.json', issue)
+        .then((response) => {
+            const issuesAll = this.state.issues.concat(issue);
+            this.setState({
+                issues: issuesAll
+            });
         });
     }
 
@@ -73,3 +75,5 @@ class Form extends Component {
 }
 
 export default Form;
+
+
