@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Field from "./field";
 import './form.css';
-import AddIssueHandler from './addIssue.js';
+import '../App.css'
+import { Link } from 'react-router-dom'
+import Dropdown from "../dropdown/dropDown";
 
 class Form extends Component {
 
@@ -46,6 +48,8 @@ class Form extends Component {
         console.log(this.state);
         return (
             <div>
+            <h1 className="header">yashHub</h1>
+            <Link className="switchbtn" to="/">Issue List</Link>
                 <Field 
                     label='Title' 
                     type='text' 
@@ -60,6 +64,8 @@ class Form extends Component {
                     placeHolder='Leave a Comment'
                     value={this.state.commentInput}
                     changed={(e) => this.inputChangeHandler(e, 'comment')}/>
+                    <Dropdown name="Asignees" />
+                    <Dropdown name="Labels" />
                 <button className='submitbtn' onClick={this.issueSubmitHandler}>Submit</button>
             </div>
     )

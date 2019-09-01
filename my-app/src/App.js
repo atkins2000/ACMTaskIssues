@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import "./App.css";
-import Dropdown from "./dropdown/dropDown";
-import Form from "./form/form"
-import OtherVarDropDown from "./dropdown/dropDown"
+import IssueList from './containers/IssueList/IssueList';
+import { Route, Switch } from 'react-router-dom';
+import AddIssueForm from './form/form';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 className="header">yashHub</h1>
-        <Dropdown name="Filters" />
-        <button className="newissbtn">New Issue</button>
-        <Form />
-        <OtherVarDropDown name="Asignees" />
-        <OtherVarDropDown name="Labels" />
+        <Switch>
+          <Route path="/" exact component={IssueList} />
+          <Route path="/newIssue" exact component={AddIssueForm} />
+        </Switch>
       </div>
     );
   }
